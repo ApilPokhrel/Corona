@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <TextView
+           android:id="@+id/ui"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="10dp"
+           android:text="Click Here for UI.....>>>>>>"/>
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        />
+
+       <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_width="match_parent"
+           android:padding="10dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:orientation="vertical"
+               android:background="@drawable/border_layout"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="विश्वको तथ्यांक"
+                   android:textStyle="bold"
+                   android:textSize="27sp"
+                   android:layout_marginBottom="5dp"
+                   android:layout_gravity="center_horizontal"
+                   android:paddingLeft="5dp"
+                   android:paddingRight="5dp"
+                   android:textColor="@color/colorPrimaryDark"/>
+
+               <LinearLayout
+                   android:id="@+id/l_d_corona"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="visible"
+                   android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center"
+                   android:padding="10dp">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="20sp"
+                   android:textColor="@color/colorPrimaryDark"
+                   android:textStyle="bold"
+                   android:text="रोगलाग्नेको संख्या:"/>
+
+                   <TextView
+                       android:id="@+id/total_infected"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="17sp"
+                       android:textColor="@color/colorAccent"
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:text="Loading..."/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center"
+                   android:padding="10dp">
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="20sp"
+                       android:textColor="@color/colorPrimaryDark"
+                       android:textStyle="bold"
+                       android:text="मर्नेको संख्या:"/>
+
+                   <TextView
+                       android:id="@+id/total_death"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="17sp"
+                       android:textColor="@color/colorAccent"
+                       android:textStyle="bold"
+                       android:layout_marginLeft="10dp"
+                       android:text="Loading..."/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center"
+                   android:padding="10dp">
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="20sp"
+                       android:textStyle="bold"
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="निकोहुनेको संख्या:"/>
+
+                   <TextView
+                       android:id="@+id/total_cured"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="17sp"
+                       android:textColor="@color/colorAccent"
+                       android:textStyle="bold"
+                       android:layout_marginLeft="10dp"
+                       android:text="Loading..."/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center"
+                   android:padding="10dp">
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="20sp"
+                       android:textStyle="bold"
+                       android:textColor="@color/colorPrimaryDark"
+                       android:text="मर्ने संभावना:"/>
+
+                   <TextView
+                       android:id="@+id/death_percent"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textSize="17sp"
+                       android:textColor="@color/colorAccent"
+                       android:textStyle="bold"
+                       android:layout_marginLeft="10dp"
+                       android:text="Loading..."/>
+               </LinearLayout>
+
+               <Button
+                   android:id="@+id/d_more"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textStyle="bold"
+                   style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                   android:layout_gravity="right"
+                   android:text="MORE"/>
+
+           </LinearLayout>
+               <include layout="@layout/data_error" android:visibility="gone" android:id="@+id/error"/>
+           </LinearLayout>
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_width="match_parent"
+           android:padding="10dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:orientation="vertical"
+               android:background="@drawable/border_layout"
+               >
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="नेपालको तथ्यांक"
+                   android:textStyle="bold"
+                   android:textSize="27sp"
+                   android:layout_marginBottom="5dp"
+                   android:layout_gravity="center_horizontal"
+                   android:paddingLeft="5dp"
+                   android:paddingRight="5dp"
+                   android:textColor="@color/colorPrimaryDark"/>
+
+               <LinearLayout
+                   android:id="@+id/l_n_corona"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="visible"
+                   android:orientation="vertical">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:gravity="center"
+                       android:padding="10dp">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="20sp"
+                           android:textColor="@color/colorPrimaryDark"
+                           android:textStyle="bold"
+                           android:text="जम्मा परिक्षण:"/>
+
+                       <TextView
+                           android:id="@+id/n_total_test"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="17sp"
+                           android:textColor="@color/colorAccent"
+                           android:layout_marginLeft="10dp"
+                           android:textStyle="bold"
+                           android:text="Loading..."/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:gravity="center"
+                       android:padding="10dp">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="20sp"
+                           android:textColor="@color/colorPrimaryDark"
+                           android:textStyle="bold"
+                           android:text="नेगेटिभ:"/>
+
+                       <TextView
+                           android:id="@+id/n_neg_test"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="17sp"
+                           android:textColor="@color/colorAccent"
+                           android:textStyle="bold"
+                           android:layout_marginLeft="10dp"
+                           android:text="Loading..."/>
+                   </LinearLayout>
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+                       android:gravity="center"
+                       android:padding="10dp">
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="20sp"
+                           android:textStyle="bold"
+                           android:textColor="@color/colorPrimaryDark"
+                           android:text="पोजेटिभ:"/>
+
+                       <TextView
+                           android:id="@+id/n_test_pos"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textSize="17sp"
+                           android:textColor="@color/colorAccent"
+                           android:textStyle="bold"
+                           android:layout_marginLeft="10dp"
+                           android:text="Loading..."/>
+                   </LinearLayout>
+
+
+                   <Button
+                       android:id="@+id/n_more"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textStyle="bold"
+                       style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                       android:layout_gravity="right"
+                       android:text="MORE"/>
+
+               </LinearLayout>
+               <include layout="@layout/data_error" android:id="@+id/n_error"/>
+           </LinearLayout>
+       </RelativeLayout>
+        <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/l_w_corona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/border_layout"
+    >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="@string/what_corona"/>
+        <Button
+            android:id="@+id/w_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_gravity="right"
+            android:text="MORE"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="काेराेना भाइरस भनेकाे के हाे?"
+        android:textStyle="bold"
+        android:textSize="27sp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignLeft="@+id/l_w_corona"
+        android:layout_alignTop="@+id/l_w_corona"
+        android:layout_marginLeft="28dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    </RelativeLayout>
+
+        <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_width="match_parent"
+           android:padding="10dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:id="@+id/l_s_corona"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:orientation="vertical"
+               android:background="@drawable/border_layout"
+               >
+
+               <ImageView
+                   android:id="@+id/s_image"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:layout_marginTop="35dp"
+                   android:scaleType="fitXY"
+                   android:layout_marginBottom="20dp"
+                   android:src="@drawable/symptoms"/>
+
+              <TextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="१००.४ डिग्रीफरेनहाइट भन्दा माथि ज्वरो आउने ।"
+                  android:background="@drawable/text_border"
+                  android:gravity="center"
+                  android:layout_centerHorizontal="true"
+                  android:textSize="18sp"
+                  android:layout_centerVertical="true"
+                  android:paddingLeft="5dp"
+                  android:layout_marginBottom="10dp"
+                  />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="श्वास प्रश्वासमा अत्याधिक समस्य देखा पर्नु ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="रूघा खोकी बढ्नु ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="१न्यूमोनिया"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="गम्भीर अवस्थाहरूमा संक्रमणीत विरामीको मृत्यु समेत हुन सक्दछ ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <Button
+                   android:id="@+id/s_more"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textStyle="bold"
+                   android:layout_gravity="right"
+                   style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                   android:text="MORE"/>
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="काेराेना भाइरस हुँदा देखापर्ने लक्षणहरु"
+               android:textStyle="bold"
+               android:textSize="27sp"
+               android:layout_marginBottom="5dp"
+               android:layout_alignLeft="@+id/l_s_corona"
+               android:layout_alignTop="@+id/l_s_corona"
+               android:layout_marginLeft="28dp"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:textColor="@color/colorPrimaryDark"/>
+
+       </RelativeLayout>
+
+        <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_width="match_parent"
+           android:padding="10dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:id="@+id/l_p_corona"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:orientation="vertical"
+               android:background="@drawable/border_layout"
+               >
+
+               <ImageView
+                   android:id="@+id/p_image"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:layout_marginTop="58dp"
+                   android:scaleType="fitXY"
+                   android:layout_marginBottom="20dp"
+                   android:src="@drawable/prevention"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="खोक्दा र हाछ्युं गर्दा नाक र मुख छोप्ने ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="नियमित रूपमा साबुन पानीले हात धोऔ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="रूघा खोकी संक्रमित व्यक्तिको सम्पर्कबाट टाढा बस्ने ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="फ्लु जस्तो लक्षण देखिएका डाक्टरसंग परामर्श लिने ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="मासु तथा अण्डा राम्रोसँग पकाएर मात्र खाने।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="बाहिर जाँदा मास्कको प्रयोग गरौं ।"
+                   android:background="@drawable/text_border"
+                   android:gravity="center"
+                   android:layout_centerHorizontal="true"
+                   android:textSize="18sp"
+                   android:layout_centerVertical="true"
+                   android:paddingLeft="5dp"
+                   android:layout_marginBottom="10dp"
+                   />
+
+               <Button
+                   android:id="@+id/p_more"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textStyle="bold"
+                   android:layout_gravity="right"
+                   style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                   android:text="MORE"/>
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="संक्रमणबाट जोगिने साधारण उपायहरू"
+               android:textStyle="bold"
+               android:textSize="27sp"
+               android:layout_marginBottom="5dp"
+               android:layout_alignLeft="@+id/l_p_corona"
+               android:layout_alignTop="@+id/l_p_corona"
+               android:layout_marginLeft="28dp"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:textColor="@color/colorPrimaryDark"/>
+
+       </RelativeLayout>
+
+        <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_width="match_parent"
+           android:padding="10dp"
+           android:layout_height="wrap_content">
+
+           <LinearLayout
+               android:id="@+id/l_t_corona"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:padding="10dp"
+               android:orientation="vertical"
+               android:background="@drawable/border_layout"
+               >
+
+               <ImageView
+                   android:id="@+id/t_image"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp"
+                   android:layout_marginTop="25dp"
+                   android:scaleType="fitXY"
+                   android:layout_marginBottom="20dp"
+                   android:src="@drawable/treatment"/>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textSize="19sp"
+                   android:layout_marginTop="10dp"
+                   android:layout_gravity="center"
+                   android:text="@string/t_corona"/>
+
+               <Button
+                   android:id="@+id/t_more"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textStyle="bold"
+                   android:layout_gravity="right"
+                   style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                   android:text="MORE"/>
+           </LinearLayout>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="यसको उपचार"
+               android:textStyle="bold"
+               android:textSize="27sp"
+               android:layout_marginBottom="5dp"
+               android:layout_alignLeft="@+id/l_t_corona"
+               android:layout_alignTop="@+id/l_t_corona"
+               android:layout_marginLeft="28dp"
+               android:paddingLeft="5dp"
+               android:paddingRight="5dp"
+               android:textColor="@color/colorPrimaryDark"/>
+
+       </RelativeLayout>
+
+
+   </LinearLayout>
+</ScrollView>
