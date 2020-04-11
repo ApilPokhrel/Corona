@@ -12,6 +12,9 @@ public class WorldDataModel implements Serializable {
     @SerializedName("country")
     @Expose
     private String country;
+    @SerializedName("countryCode")
+    @Expose
+    private String countryCode;
     @SerializedName("totalCases")
     @Expose
     private Integer totalCases;
@@ -48,6 +51,14 @@ public class WorldDataModel implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public Integer getTotalCases() {
@@ -111,6 +122,7 @@ public class WorldDataModel implements Serializable {
         return "WorldDataModel{" +
                 "id='" + id + '\'' +
                 ", country='" + country + '\'' +
+                ", countryCode='" + countryCode + '\'' +
                 ", totalCases=" + totalCases +
                 ", newCases=" + newCases +
                 ", totalDeaths=" + totalDeaths +

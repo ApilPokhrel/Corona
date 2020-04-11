@@ -2,14 +2,17 @@ package com.rumsan.corona.fragment;
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -60,6 +63,8 @@ public class FAQsFragment extends Fragment {
     private int limit = 10;
     int firstCall = 0;
 
+    OnFragmentInteractionListener mListener = null;
+
 
     public FAQsFragment() {
         // Required empty public constructor
@@ -70,15 +75,13 @@ public class FAQsFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment RequestPhoneFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FAQsFragment newInstance(String param1, String param2) {
+    public static FAQsFragment newInstance(String param1) {
         FAQsFragment fragment = new FAQsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -104,6 +107,19 @@ public class FAQsFragment extends Fragment {
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
 
+        LinearLayout toolbar = view.findViewById(R.id.toolbar_layout);
+
+        ImageView back = toolbar.findViewById(R.id.back);
+        TextView title = toolbar.findViewById(R.id.bar_title);
+
+        title.setText("FAQs");
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onBackPressFaq();
+            }
+        });
 
         rv.addOnScrollListener(new FaqPagination(linearLayoutManager) {
             @Override
@@ -194,6 +210,28 @@ public class FAQsFragment extends Fragment {
 
         if ((currentPage + 1) != TOTAL_PAGES) adapter.addLoadingFooter();
         else isLastPage = true;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FAQsFragment.OnFragmentInteractionListener) {
+            mListener = (FAQsFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onBackPressFaq();
     }
 }
 

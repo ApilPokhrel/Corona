@@ -1,5 +1,6 @@
 package com.rumsan.corona.fragment;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -58,6 +61,7 @@ public class MythsFragment extends Fragment {
     private int limit = 10;
     int firstCall = 0;
 
+    OnFragmentInteractionListener mListener = null;
 
 
     public MythsFragment() {
@@ -65,11 +69,10 @@ public class MythsFragment extends Fragment {
     }
 
 
-    public static MythsFragment newInstance(String param1, String param2) {
+    public static MythsFragment newInstance(String param1) {
         MythsFragment fragment = new MythsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,6 +98,20 @@ public class MythsFragment extends Fragment {
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(mythsRecyclerAdapter);
 
+
+        LinearLayout toolbar = view.findViewById(R.id.toolbar_layout);
+
+        ImageView back = toolbar.findViewById(R.id.back);
+        TextView title = toolbar.findViewById(R.id.bar_title);
+
+        title.setText("Myths");
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onBackPressMyths();
+            }
+        });
 
 
 
@@ -186,5 +203,27 @@ public class MythsFragment extends Fragment {
 
         if ((currentPage + 1) != TOTAL_PAGES) mythsRecyclerAdapter.addLoadingFooter();
         else isLastPage = true;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MythsFragment.OnFragmentInteractionListener) {
+            mListener = (MythsFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onBackPressMyths();
     }
 }

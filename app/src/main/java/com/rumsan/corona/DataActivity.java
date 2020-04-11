@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.rumsan.corona.adapter.WorldDataRecyclerAdapter;
 import com.rumsan.corona.entity.WorldDataModel;
@@ -19,6 +22,8 @@ public class DataActivity extends AppCompatActivity {
 
     RecyclerView worldData;
     EditText search;
+    ImageView back;
+    LinearLayout search_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +31,16 @@ public class DataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data);
 
         worldData = findViewById(R.id.worldData);
-        search = findViewById(R.id.search);
+        search = findViewById(R.id.search_input);
+        back = findViewById(R.id.back);
+        search_icon = findViewById(R.id.search_icon_layout);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         final List<WorldDataModel> datas = (List<WorldDataModel>) intent.getSerializableExtra("datas");

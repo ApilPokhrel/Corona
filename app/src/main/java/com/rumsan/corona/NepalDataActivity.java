@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.rumsan.corona.adapter.NepalDataRecyclerAdapter;
 import com.rumsan.corona.api.ApiEndpoint;
@@ -43,6 +45,20 @@ public class NepalDataActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
         errorLayout = findViewById(R.id.error);
         dataLayout = findViewById(R.id.data);
+
+        LinearLayout toolbar = findViewById(R.id.toolbar_layout);
+
+        ImageView back = toolbar.findViewById(R.id.back);
+        TextView title = toolbar.findViewById(R.id.bar_title);
+
+        title.setText("NepalData");
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         tryAgain = errorLayout.findViewById(R.id.try_again);
 

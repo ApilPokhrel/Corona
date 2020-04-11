@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="7dp"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <include
+        android:layout_marginTop="0dp"
+        layout="@layout/toolbar_title_back"
+        android:id="@+id/toolbar_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -15,6 +27,8 @@
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:visibility="visible"/>
+    </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progress"

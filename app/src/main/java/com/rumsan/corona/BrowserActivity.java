@@ -112,4 +112,10 @@ public void loadPage(){
     webView.loadUrl(url);
 }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        webView.stopLoading();
+        webView.destroy();
+    }
 }

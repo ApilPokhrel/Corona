@@ -11,4 +11,6 @@
     <color name="text_title_dark">#838181</color>
     <color name="blue">#3852DA</color>
     <color name="colorPrimaryDarkBlue">#050522</color>
+    <color name="yellow">#E2C62C</color>
+    <color name="orange">#FF8424</color>
 </resources>

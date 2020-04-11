@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -71,15 +72,12 @@ final NewsModel n = news.get(position);
         switch (getItemViewType(position)) {
         case ITEM:
         final ViewHolder vh = (ViewHolder) holder;
-        vh.extra.setVisibility(View.GONE);
         String fD = DateUtil.parseDate(n.getUpdatedAt());
         vh.time.setText(fD);
         vh.title.setText(n.getTitle());
         vh.source.setText(n.getSource());
         vh.summary.setText(n.getSummary());
-            Spanned Text = Html.fromHtml("<a href='"+n.getUrl()+"'>Source</a>");
-            vh.link.setText(Text);
-            vh.link.setOnClickListener(new View.OnClickListener() {
+            vh.main.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, BrowserActivity.class);
@@ -89,17 +87,6 @@ final NewsModel n = news.get(position);
             });
 
             Picasso.get().load(n.getImageUrl()).placeholder(R.drawable.progress_animation).fit().into(vh.image);
-
-            vh.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(vh.extra.getVisibility() == View.VISIBLE){
-                vh.extra.setVisibility(View.GONE);
-                } else {
-                vh.extra.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
 
         break;
@@ -131,8 +118,8 @@ public int getItemCount() {
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder{
-    RelativeLayout extra;
-    TextView time, title, summary, link;
+    LinearLayout main;
+    TextView time, title, summary;
     Chip source;
     ImageView image;
 
@@ -140,13 +127,12 @@ public class ViewHolder extends RecyclerView.ViewHolder{
     public ViewHolder(View view){
         super(view);
 
-        extra = view.findViewById(R.id.extra);
+        main = view.findViewById(R.id.main);
         time = view.findViewById(R.id.time);
         title = view.findViewById(R.id.title);
         source = view.findViewById(R.id.source);
         image = view.findViewById(R.id.image);
         summary = view.findViewById(R.id.summary);
-        link = view.findViewById(R.id.link);
     }
 }
 protected class LoadingVH extends RecyclerView.ViewHolder {

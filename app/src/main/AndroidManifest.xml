@@ -11,12 +11,15 @@
         android:roundIcon="@drawable/bhunte"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NepalDataActivity"></activity>
+        <activity android:name=".CreditActivity"></activity>
+        <activity android:name=".AudioActivity" />
+        <activity android:name=".PodcastActivity" />
+        <activity android:name=".SymptomActivity" />
+        <activity android:name=".NepalDataActivity" />
         <activity android:name=".DataActivity" />
         <activity android:name=".BrowserActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".UiActivity" />
-        <activity android:name=".HomeActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

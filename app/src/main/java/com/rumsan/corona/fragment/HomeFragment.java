@@ -1,25 +1,30 @@
 package com.rumsan.corona.fragment;
 
 
+import android.content.Context;
+
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.VideoView;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+
 import com.rumsan.corona.BrowserActivity;
+import com.rumsan.corona.CreditActivity;
 import com.rumsan.corona.DataActivity;
-import com.rumsan.corona.NepalDataActivity;
 import com.rumsan.corona.R;
-import com.rumsan.corona.UiActivity;
 import com.rumsan.corona.api.ApiEndpoint;
 import com.rumsan.corona.api.RetrofitInstance;
 import com.rumsan.corona.entity.NepalDataModel;
@@ -40,36 +45,28 @@ public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private HomeFragment.OnFragmentInteractionListener mListener;
+
     private List<WorldDataModel> datas;
 
 
-    Button w_m, s_m, p_m, t_m, d_m, tryAgain, nTryAgain, n_d_m;
-    LinearLayout errorLayout, dataLayout, nErrorLayout, nDataLayout;
-    TextView totalInfected, totalDeath, totalCured, deathPercent, nTotalTest, nNegTest, nPosTest;
-    
+    LinearLayout symptoms, hospitals, liveData, news, myths, faq, explain, podcast, wError, nError;
+    TextView wInfected, wDeath, wDeathPercent, wCured, nTest, nPos, nNeg, wMore, nMore, wTryAgain, nTryAgain;
+    GridLayout worldGrid;
+    CardView nepCard;
+
     private ApiEndpoint apiEndpoint;
     int firstCall = 0;
    
 
     public HomeFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RequestPhoneFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
+
+    public static HomeFragment newInstance(String param1) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,93 +82,53 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.home_layout_2, container, false);
 
-        VideoView vv = view.findViewById(R.id.video);
-        errorLayout = view.findViewById(R.id.error);
-        dataLayout = view.findViewById(R.id.l_d_corona);
-        nDataLayout = view.findViewById(R.id.l_n_corona);
-        nErrorLayout = view.findViewById(R.id.n_error);
-        TextView ui = view.findViewById(R.id.ui);
-        ui.setOnClickListener(new View.OnClickListener() {
+
+
+
+        ImageView optionMenu = view.findViewById(R.id.popup_menu);
+        optionMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(getActivity(), UiActivity.class);
-                getActivity().startActivity(in);
-            }
-        });
-        String uriPath =  "android.resource://"+  getContext().getPackageName() + "/raw/bhuntay";
-        Uri uri = Uri.parse(uriPath);
-        vv.setVideoURI(uri);
-        vv.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-            }
-        });
-        vv.start();
+                PopupMenu popup = new PopupMenu(getContext(), optionMenu);
+                popup.getMenuInflater()
+                        .inflate(R.menu.popup_menu, popup.getMenu());
 
-        w_m = view.findViewById(R.id.w_more);
-        p_m = view.findViewById(R.id.p_more);
-        s_m = view.findViewById(R.id.s_more);
-        t_m = view.findViewById(R.id.t_more);
-        d_m = view.findViewById(R.id.d_more);
-        n_d_m = view.findViewById(R.id.n_more);
-        tryAgain = errorLayout.findViewById(R.id.try_again);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int id = item.getItemId();
+                        switch (id){
+                            case R.id.emergency:
+                                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel","1115", null));
+                                startActivity(intent);
+                                return true;
+                            case R.id.credit:
+                                Intent intent1 = new Intent(getContext(), CreditActivity.class);
+                                startActivity(intent1);
+                                return true;
+                            default:
+                                return true;
+                        }
+                    }
+                });
 
-        d_m.setVisibility(View.GONE);
-        n_d_m.setVisibility(View.GONE);
-
-        nTryAgain = nErrorLayout.findViewById(R.id.try_again);
-
-
-        totalInfected = view.findViewById(R.id.total_infected);
-        totalDeath = view.findViewById(R.id.total_death);
-        totalCured = view.findViewById(R.id.total_cured);
-        deathPercent = view.findViewById(R.id.death_percent);
-
-        nTotalTest = view.findViewById(R.id.n_total_test);
-        nNegTest = view.findViewById(R.id.n_neg_test);
-        nPosTest = view.findViewById(R.id.n_test_pos);
-
-
-        w_m.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BrowserActivity.class);
-                intent.putExtra("url", "https://nepalcorona.info/introduction");
-                startActivity(intent);
+                popup.show();
             }
         });
 
-        s_m.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BrowserActivity.class);
-                intent.putExtra("url", "https://nepalcorona.info/symptoms");
-                startActivity(intent);
-            }
-        });
+        worldGrid = view.findViewById(R.id.worldGrid);
+        nepCard = view.findViewById(R.id.nepCard);
 
-        p_m.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BrowserActivity.class);
-                intent.putExtra("url", "https://nepalcorona.info/prevention");
-                startActivity(intent);
-            }
-        });
+        wError = view.findViewById(R.id.w_error);
+        nError = view.findViewById(R.id.n_error);
 
-        t_m.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BrowserActivity.class);
-                intent.putExtra("url", "https://nepalcorona.info/treatment");
-                startActivity(intent);
-            }
-        });
+        wTryAgain = wError.findViewById(R.id.try_again);
+        nTryAgain = nError.findViewById(R.id.try_again);
 
-        d_m.setOnClickListener(new View.OnClickListener() {
+        wMore = view.findViewById(R.id.d_world_more);
+        nMore = view.findViewById(R.id.d_nep_more);
+        wMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DataActivity.class);
@@ -180,109 +137,218 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        n_d_m.setOnClickListener(new View.OnClickListener() {
+        nMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), NepalDataActivity.class);
+                Intent intent = new Intent(getContext(), BrowserActivity.class);
+                intent.putExtra("url", "https://nepalcorona.info/live");
                 startActivity(intent);
             }
         });
 
-        dataLayout.setVisibility(View.VISIBLE);
-        errorLayout.setVisibility(View.GONE);
+        wInfected = view.findViewById(R.id.w_infected);
+        wDeath = view.findViewById(R.id.w_death);
+        wCured = view.findViewById(R.id.w_cured);
+        wDeathPercent = view.findViewById(R.id.w_death_percent);
 
-        nDataLayout.setVisibility(View.VISIBLE);
-        nErrorLayout.setVisibility(View.GONE);
+        nTest = view.findViewById(R.id.n_test);
+        nPos = view.findViewById(R.id.pos);
+        nNeg = view.findViewById(R.id.neg);
+
+        symptoms = view.findViewById(R.id.symptoms);
+        symptoms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadSymptoms();
+            }
+        });
+        hospitals = view.findViewById(R.id.hospitals);
+        hospitals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadHospitals();
+            }
+        });
+        liveData = view.findViewById(R.id.live_data);
+        liveData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadLiveData(datas);
+            }
+        });
+        news = view.findViewById(R.id.news);
+        news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadNews();
+            }
+        });
+        myths = view.findViewById(R.id.myth);
+        myths.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadMyths();
+            }
+        });
+        faq = view.findViewById(R.id.faq);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadFaq();
+            }
+        });
+        explain = view.findViewById(R.id.explain);
+        explain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadExplain();
+            }
+        });
+        podcast = view.findViewById(R.id.podcast);
+        podcast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onLoadPodcast();
+            }
+        });
+
+
+
+
+        //TODO set world Data and Nep Data
+        worldGrid.setVisibility(View.VISIBLE);
+        wError.setVisibility(View.GONE);
+        wMore.setVisibility(View.GONE);
+
+        nepCard.setVisibility(View.VISIBLE);
+        nError.setVisibility(View.GONE);
+        nMore.setVisibility(View.GONE);
         fillData();
         fillNepData();
         return view;
     }
 
-   public void fillData(){
-       Call<List<WorldDataModel>> call = apiEndpoint.worldData();
-       call.enqueue(new Callback<List<WorldDataModel>>() {
-           @Override
-           public void onResponse(Call<List<WorldDataModel>> call, Response<List<WorldDataModel>> response) {
+    public void fillData(){
+        Call<List<WorldDataModel>> call = apiEndpoint.worldData();
+        call.enqueue(new Callback<List<WorldDataModel>>() {
+            @Override
+            public void onResponse(Call<List<WorldDataModel>> call, Response<List<WorldDataModel>> response) {
+
+                worldGrid.setVisibility(View.VISIBLE);
+                wError.setVisibility(View.GONE);
+                wMore.setVisibility(View.VISIBLE);
+                datas = response.body();
+
+                WorldDataModel wm = null;
+
+                for(WorldDataModel m: datas){
+                    if(m.getCountry().trim().equalsIgnoreCase("world"))
+                    {
+                        wm = m;
+                    }
+                }
+
+                if(wm != null) {
+                    wInfected.setText(String.valueOf(wm.getTotalCases()));
+                    wDeath.setText(String.valueOf(wm.getTotalDeaths()));
+                    wCured.setText(String.valueOf(wm.getTotalRecovered()));
+                    double dp = (Double.valueOf(wm.getTotalDeaths()) / Double.valueOf(wm.getTotalCases())) * 100.0;
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    wDeathPercent.setText(String.valueOf(df.format(dp)) + "%");
+                    firstCall++;
+                } else {
+                    fillData();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<WorldDataModel>> call, Throwable t) {
+                if(firstCall < 1) {
+                    worldGrid.setVisibility(View.GONE);
+                    wError.setVisibility(View.VISIBLE);
+                    wMore.setVisibility(View.GONE);
+                    wTryAgain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            worldGrid.setVisibility(View.VISIBLE);
+                            wError.setVisibility(View.GONE);
+                            fillData();
+                        }
+                    });
+                }
+            }
+        });
+    }
 
 
-               dataLayout.setVisibility(View.VISIBLE);
-               errorLayout.setVisibility(View.GONE);
-               d_m.setVisibility(View.VISIBLE);
-               datas = response.body();
-
-               WorldDataModel wm = null;
-
-               for(WorldDataModel m: datas){
-                   if(m.getCountry().trim().length() < 1)
-                   {
-                       wm = m;
-                   }
-               }
-
-               if(wm != null) {
-                   totalInfected.setText(String.valueOf(wm.getTotalCases()));
-                   totalDeath.setText(String.valueOf(wm.getTotalDeaths()));
-                   totalCured.setText(String.valueOf(wm.getTotalRecovered()));
-                   double dp = (Double.valueOf(wm.getTotalDeaths()) / Double.valueOf(wm.getTotalCases())) * 100.0;
-                   DecimalFormat df = new DecimalFormat("0.00");
-                   deathPercent.setText(String.valueOf(df.format(dp)) + "%");
-                   firstCall++;
-               } else {
-                   fillData();
-               }
-           }
-
-           @Override
-           public void onFailure(Call<List<WorldDataModel>> call, Throwable t) {
-               if(firstCall < 1) {
-                   dataLayout.setVisibility(View.GONE);
-                   errorLayout.setVisibility(View.VISIBLE);
-                   d_m.setVisibility(View.GONE);
-                   tryAgain.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                           dataLayout.setVisibility(View.VISIBLE);
-                           errorLayout.setVisibility(View.GONE);
-                           fillData();
-                       }
-                   });
-               }
-           }
-       });
-   }
-
-
-   public void fillNepData(){
+    public void fillNepData(){
         Call<NepalDataModel> call = apiEndpoint.nepalData();
         call.enqueue(new Callback<NepalDataModel>() {
             @Override
             public void onResponse(Call<NepalDataModel> call, Response<NepalDataModel> response) {
-                nDataLayout.setVisibility(View.VISIBLE);
-                nErrorLayout.setVisibility(View.GONE);
-                n_d_m.setVisibility(View.VISIBLE);
+                nepCard.setVisibility(View.VISIBLE);
+                nError.setVisibility(View.GONE);
+                nMore.setVisibility(View.VISIBLE);
 
                 NepalDataModel nd = response.body();
-                nTotalTest.setText(String.valueOf(nd.getTestedTotal()));
-                nNegTest.setText(String.valueOf(nd.getTestedNegative()));
-                nPosTest.setText(String.valueOf(nd.getTestedPositive()));
+                nTest.setText(String.valueOf(nd.getTestedTotal()));
+                nNeg.setText(String.valueOf(nd.getTestedNegative()));
+                nPos.setText(String.valueOf(nd.getTestedPositive()));
             }
 
             @Override
             public void onFailure(Call<NepalDataModel> call, Throwable t) {
-                nDataLayout.setVisibility(View.GONE);
-                nErrorLayout.setVisibility(View.VISIBLE);
-                n_d_m.setVisibility(View.GONE);
+                nepCard.setVisibility(View.GONE);
+                nError.setVisibility(View.VISIBLE);
+                nMore.setVisibility(View.GONE);
                 nTryAgain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        nDataLayout.setVisibility(View.VISIBLE);
-                        nErrorLayout.setVisibility(View.GONE);
+                        nepCard.setVisibility(View.VISIBLE);
+                        nError.setVisibility(View.GONE);
                         fillNepData();
                     }
                 });
             }
         });
-   }
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof HomeFragment.OnFragmentInteractionListener) {
+            mListener = (HomeFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+
+        void onLoadSymptoms();
+
+        void onLoadHospitals();
+
+        void onLoadLiveData(List<WorldDataModel> wd);
+
+        void onLoadNews();
+
+        void onLoadMyths();
+
+        void onLoadFaq();
+
+        void onLoadExplain();
+
+        void onLoadPodcast();
+
+    }
 }

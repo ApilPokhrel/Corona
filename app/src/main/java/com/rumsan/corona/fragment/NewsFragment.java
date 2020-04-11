@@ -1,13 +1,16 @@
 package com.rumsan.corona.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -58,16 +61,17 @@ public class NewsFragment extends Fragment {
     private int limit = 10;
     int total = 0;
 
+    OnFragmentInteractionListener mListener;
+
     public NewsFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static NewsFragment newInstance(String param1, String param2) {
+    public static NewsFragment newInstance(String param1) {
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,6 +93,20 @@ public class NewsFragment extends Fragment {
         progressBar = view.findViewById(R.id.progress);
         tryAgain = view.findViewById(R.id.try_again);
         error = view.findViewById(R.id.error);
+
+        LinearLayout toolbar = view.findViewById(R.id.toolbar_layout);
+
+        ImageView back = toolbar.findViewById(R.id.back);
+        TextView title = toolbar.findViewById(R.id.bar_title);
+
+        title.setText("News");
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              mListener.onBackPressNews();
+            }
+        });
 
         linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
@@ -183,5 +201,26 @@ public class NewsFragment extends Fragment {
 
         if ((currentPage + 1) * limit != total) adapter.addLoadingFooter();
         else isLastPage = true;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof NewsFragment.OnFragmentInteractionListener) {
+            mListener = (NewsFragment.OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onBackPressNews();
     }
 }

@@ -13,71 +13,12 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:elevation="5dp"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:background="@drawable/rect">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="मिती"
-                android:textSize="20dp"
-                android:textColor="@color/text"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/text"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="बसाई देश"
-                android:textSize="20dp"
-                android:textColor="@color/text"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/text"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="संक्रमित"
-                android:textSize="20dp"
-                android:textColor="@color/text"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@color/text"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="मृत्यु"
-                android:textColor="@color/text"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
+        <include
+            android:layout_marginTop="0dp"
+            layout="@layout/toolbar_title_back"
+            android:id="@+id/toolbar_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nepData"

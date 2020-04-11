@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- A CardView that contains a TextView -->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -87,6 +87,7 @@
                    android:layout_marginTop="10dp"
                    android:orientation="horizontal">
                    <TextView
+                       android:visibility="gone"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:textSize="17sp"
@@ -98,7 +99,7 @@
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginLeft="5dp"
-                       android:textSize="15sp"
+                       android:textSize="17sp"
                        android:text=""/>
                </LinearLayout>
 
@@ -108,6 +109,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
@@ -118,7 +120,7 @@
                     android:id="@+id/fact_np"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:layout_marginLeft="5dp"
                     android:text=""/>
             </LinearLayout>

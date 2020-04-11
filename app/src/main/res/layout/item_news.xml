@@ -1,113 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?><!-- A CardView that contains a TextView -->
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="#fff"
-    android:padding="20dp"
-    card_view:cardCornerRadius="4dp"
-    >
-    <RelativeLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
+        android:padding="5dp">
 
-        >
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:text="2 min Ago "
-            android:layout_alignParentRight="true"
-            />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/source"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Politics"
-            app:chipCornerRadius="5dp"
-            android:background="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            android:textColor="@color/text"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
-            />
-
-        <LinearLayout
-            android:id="@+id/title_div"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/source"
-            android:orientation="horizontal"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="@color/box"
             >
+            <LinearLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:letterSpacing="-0.02"
-            android:lineSpacingExtra="5sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="Zero is my name"
-             />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
 
-            <ImageView
-                android:id="@+id/image"
-                android:gravity="end"
-                android:layout_marginRight="10dp"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                />
+                    >
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="2 min Ago "
+                    android:textColor="@color/text"
+                    android:layout_alignParentRight="true"
+                    />
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Politics"
+                    app:chipCornerRadius="5dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    android:textColor="@color/text"
+                    android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
+                    />
+                </RelativeLayout>
 
-</LinearLayout>
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp" />
 
-        <RelativeLayout
-            android:id="@+id/extra"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/title_div"
-            android:padding="5dp"
-            android:layout_marginBottom="20dp"
-            >
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="How Covid-19 attacks your body"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/text"/>
 
-            <TextView
-                android:id="@+id/summary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginLeft="5dp"
-                android:text=""/>
+                <TextView
+                    android:id="@+id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="In this episode of Vox's Reset podcast Ed Yong from The Atlantic explains how a little spiky ball called SARS-CoV2 brought the world to its knees."
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/text_title_dark"/>
 
-            <TextView
-                android:layout_below="@+id/summary"
-                android:id="@+id/link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:textSize="14sp"
-                android:text="source"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                 />
-        </RelativeLayout>
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>

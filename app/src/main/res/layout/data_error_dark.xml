@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/error_dark"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/text_title"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:text="Network Problem !"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_title_dark"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:text="Data Could not be loaded"/>
+
+
+    <TextView
+        android:id="@+id/try_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/text"
+        android:background="@drawable/button_rect"
+        android:paddingLeft="15dp"
+        android:layout_marginRight="2dp"
+        android:paddingRight="15dp"
+        android:paddingTop="6dp"
+        android:textStyle="bold"
+        android:paddingBottom="6dp"
+        android:textSize="13dp"
+        android:text="Try Again"/>
+
+
+</LinearLayout>
