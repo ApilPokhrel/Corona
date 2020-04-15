@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreditActivity">
-
 
     <LinearLayout
         android:orientation="vertical"
@@ -54,20 +53,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
-                android:src="@drawable/rumsan200x200"/>
+                android:src="@drawable/rumsan100x100"/>
 
             <ImageView
                 android:layout_columnWeight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bhunte200x200"/>
+                android:src="@drawable/bhunte100x100"/>
         </GridLayout>
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Developed by Rumsan Associates in association with askbhunte"
+                android:text="Developed by Rumsan Associates in association with Askbhunte"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
@@ -89,7 +88,7 @@
             app:cardBackgroundColor="@color/box"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:orientation="vertical">
@@ -97,7 +96,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/hamrolifebank200x200"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/hamrolifebank200x2002"/>
 
                 <TextView
                     android:id="@+id/hm_text"
@@ -116,4 +116,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rumsan.corona.AudioActivity;
-import com.rumsan.corona.BrowserActivity;
 import com.rumsan.corona.R;
 import com.rumsan.corona.entity.PodcastModel;
 import com.squareup.picasso.Picasso;
@@ -26,10 +25,12 @@ public class PodcastRecyclerAdapter extends RecyclerView.Adapter<PodcastRecycler
 
     List<PodcastModel> datas;
     Context context;
+    OnAudioLinkChanged mListener;
 
     public PodcastRecyclerAdapter(Context context){
         this.context = context;
         this.datas = new ArrayList<>();
+        this.mListener = (OnAudioLinkChanged) context; //Activity must implement interface
     }
 
     @NonNull
@@ -47,9 +48,10 @@ public class PodcastRecyclerAdapter extends RecyclerView.Adapter<PodcastRecycler
         holder.audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BrowserActivity.class);
-                intent.putExtra("url", datas.get(position).getAudioUrl());
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, AudioActivity.class);
+//                intent.putExtra("url", datas.get(position).getAudioUrl());
+//                context.startActivity(intent);
+                mListener.play(datas.get(position).getAudioUrl(), datas.get(position).getTitle());
             }
         });
 
@@ -106,6 +108,10 @@ public class PodcastRecyclerAdapter extends RecyclerView.Adapter<PodcastRecycler
 
     public PodcastModel getItem(int position) {
         return datas.get(position);
+    }
+
+    public interface OnAudioLinkChanged {
+        void play(String url, String title);
     }
 }
 

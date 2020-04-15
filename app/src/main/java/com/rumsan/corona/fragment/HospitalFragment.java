@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -93,15 +94,13 @@ public class HospitalFragment extends Fragment {
         back = view.findViewById(R.id.back);
         search = view.findViewById(R.id.search_input);
 
-//        adapter = new HospitalRecyclerAdapter(getContext());
-//        linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-//        rv.setLayoutManager(linearLayoutManager);
-//        rv.setAdapter(adapter);
 
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
                 mListener.onBackPressHospital();
             }
         });
@@ -114,7 +113,7 @@ public class HospitalFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-               if(adapter != null && adapter.getItemCount() > 0) adapter.getFilter().filter(s);
+               if(adapter == null){load();} else{ adapter.getFilter().filter(s); }
                 return;
             }
 

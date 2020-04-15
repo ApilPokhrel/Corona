@@ -7,41 +7,54 @@
     android:padding="20dp"
     tools:context=".AudioActivity">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_oval"
         android:padding="12dp"
-        android:orientation="horizontal">
+        >
+
+        <TextView
+            android:visibility="visible"
+            android:layout_alignParentRight="false"
+            android:id="@+id/time_current"
+            android:layout_marginLeft="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:textColor="@color/text"
+            android:text="00:00"/>
+
+        <TextView
+            android:visibility="visible"
+            android:layout_alignParentRight="true"
+            android:id="@+id/time_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/text"
+            android:text="00:00"/>
 
         <ImageView
             android:layout_alignParentLeft="true"
             android:id="@+id/toogle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/ic_play_circle_outline_white_24dp"/>
 
         <SeekBar
             android:id="@+id/seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginRight="0dp"
-            android:max="100"
+            android:layout_marginTop="15dp"
             android:maxHeight="3dp"
             android:minHeight="3dp"
             android:progressDrawable="@drawable/seek_control"
             android:thumbTint="@color/yellow"/>
 
-        <TextView
-            android:visibility="gone"
-            android:layout_alignParentRight="true"
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text"
-            android:text="03:22"/>
     </RelativeLayout>
 
 </LinearLayout>

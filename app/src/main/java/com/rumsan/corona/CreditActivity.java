@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,8 +19,16 @@ public class CreditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_credit);
 
         TextView hm = findViewById(R.id.hm_text);
-        Spanned sp = Html.fromHtml("Special thanks to <i>Hamro</i> Lifebank team for sharing hospital data with us");
+        TextView rm = findViewById(R.id.title);
+        Spanned sp = Html.fromHtml("Special thanks to <a href='https://hamrolifebank.com/'><i>Hamro</i> Lifebank</a> team for sharing hospital data with us");
         hm.setText(sp);
+        hm.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+        Spanned sp2 = Html.fromHtml("Developed by <a href='https://rumsan.com/'>Rumsan Associates</a> in association with <a href='https://askbhunte.com/'>Askbhunte</a>");
+        rm.setText(sp2);
+        rm.setMovementMethod(LinkMovementMethod.getInstance());
+
 
         LinearLayout toolbar = findViewById(R.id.toolbar_layout);
 
